@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+
+/* 
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(5, 4, 4);
+}
+.logo{
+    width: 100px;
+    
+}
+.logo-container{
+    cursor: pointer;
+}
+
+.filter-btn{
+    cursor: pointer;
+    margin:10px;
+}
+.eat-by-click{
+   padding-left: 15%; 
+   margin-top:-5%;
+   color:rgb(53, 155, 122);
+}
+.nav-items ul{
+    font-size: 24px;
+    display: flex;
+}
+.nav-items > ul > li{
+    padding:10px;
+    margin:10px;
+    list-style-type: none;
+    cursor:pointer;
+   
+    color:rgb(44, 189, 100);
+  border:1px solid rgb(135, 195, 135)
+
+}
+a {
+    text-decoration: none;
+    color:rgb(44,189,100)
+
+}
+.nav-items > ul > li:hover{
+ background-color: #f0f0f0;
+ color:rgb(44, 106, 85);
+}
+.res-container{
+ display: flex;
+ flex-wrap: wrap;   
+}
+.res-card{
+    margin:1rem;
+    width: 300px;
+    padding:5px;
+    background-color:#f0f0f0 ;
+
+}
+.res-card:hover{
+    cursor: pointer;
+    border:1px solid black
+}
+.search{
+    padding:10px;
+}
+.res-logo{
+    width: 100%;
+ 
+}
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.shimmer-card{
+height: 400px;
+width: 300px;
+background-color: #f0f0f0;
+margin:20px;
+}
+.login{
+    padding: 0 20px;
+    cursor: pointer;
+    background-color: rgb(74, 179, 133);
+    color:white;
+    border:none;
+}
+.filter{
+    display:flex;
+}
+.menulist{
+    margin-left:20%;
+    margin-right:5%;
+}
+.menu-item{
+    display:flex;
+    border-bottom: 0.7px solid rgb(204, 203, 203);
+    justify-content: space-around;
+}
+.menu-item img{
+  height: 60%;
+  margin-top:10%;
+}
+.menu >h1{
+    text-align: center;
+    
+} */
