@@ -19,14 +19,15 @@ const RestaurantCard = (props) => {
 // input-- RestaurantCard
 // output -- ReatauranCard with Pure veg label
 
-export const withVegLabel = (RestaurantCard) => {
+export const withVegLabel = (RestaurantCard) => { // HoC function that takes RestaurantCard Compnent as argument
 
   return (props) => {
     return <div>
       <label className="absolute bg-green-700 text-white m-2 p-1 rounded-lg">
        🔖 Pure Veg 
       </label>
-      <RestaurantCard {...props} />    </div>;
+      <RestaurantCard {...props} /> 
+         </div>;
   };
 };
 

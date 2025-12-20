@@ -2,16 +2,16 @@ import RestaurantCard, { withVegLabel } from "./RestaurantCard";
 import resList from "../Api";
 import { useEffect, useState,useContext } from "react";
 import Shimmer from "./Shimmer";
-import { Link } from "react-router";
+import {Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext/UserContext.js";
 
 const Body = () => {
   // state variable - superpowerful variable
-  const [listofRestaurant, setListofrestaurant] = useState([]); // destructure
+  const [listofRestaurant, setListofrestaurant] = useState([]);  // destructure
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard);
+  const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard); // HOC call to get new component with veg label to display pure veg restaurant
   const {setUserName}=useContext(UserContext);
   const {loggedInUser}=useContext(UserContext);
   useEffect(() => {
@@ -22,21 +22,21 @@ const Body = () => {
     )
       .then((res) => res.json())
 
-      .then((data) => {
+      .then((data) => {  // promise chainging to get data
         const resData =
           data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
             ?.restaurants;
         setListofrestaurant(resData);
         setFilteredRestaurant(resData);
 
-        console.log("lsit", resData);
+        //console.log("lsit", resData);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const onlineStatus = useOnlineStatus();
+  const onlineStatus = useOnlineStatus(); //custom hook call to check online status
 
-  if (onlineStatus === false) {
+  if (onlineStatus === false) { 
     return (
       <h1>
         Looks like you're offline !! Please check your internet connection...
@@ -49,7 +49,8 @@ const Body = () => {
   ) : (
     <div className="body">
       <div className="filter flex">
-        <div className="search m-4 p-4">
+
+        <div className="search m-4 p-4">  
           <input
             type="text"
             value={searchText}
@@ -97,7 +98,7 @@ const Body = () => {
       </div>
       <div className="res-container flex flex-wrap px-4 mx-4">
         {filteredRestaurant?.map((restaurant, index) => (
-          <Link
+          <Link  
             key={
               restaurant?.info?.id
                 ? String(restaurant?.info?.id)
@@ -122,7 +123,7 @@ const Body = () => {
                     ? String(restaurant?.info?.id)
                     : `restaurant-${index}`
                 }
-                resData={restaurant}
+                resData={restaurant} 
                 // key={restaurant?.info?.id || index}
                 //   key={restaurant?.info?.id} // only key is very usefiul to change or update dom in every render
                 // name={restaurant?.info?.name}

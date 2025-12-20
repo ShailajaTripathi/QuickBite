@@ -44,7 +44,6 @@ const {loggedInUser}= useContext(UserContext);
             {btnName}
           </button>
           <li className="px-4 font-bold"> 👤 {loggedInUser}</li>
-
         </ul>
       </div>
     </div>

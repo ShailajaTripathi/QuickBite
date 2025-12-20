@@ -1,10 +1,11 @@
-import { useState } from "react";
-import Shimmer from "./Shimmer";
+import { useState } from "react";   //named export
+import Shimmer from "./Shimmer";  // default import 
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { useParams } from "react-router";
 import RestaurantCategory from "./RestaurantCategory";
+                             
 
-const RestaurantMenu = () => {
+  const RestaurantMenu = () => {
   // const [showItems, setShowItems] = useState(false);
   const [showIndex, setShowIndex] = useState(0);
 
@@ -13,7 +14,10 @@ const RestaurantMenu = () => {
 
   if (resInfo === null) return <Shimmer />;
 
-  const { name, cuisines, costForTwo } = resInfo?.[2]?.card?.card?.info;
+  console.log("resInfo",resInfo)
+    //const { name, cuisines, costForTwo } = resInfo?.[1]?.card?.card?.itemCards;
+
+  //const { name, cuisines, costForTwo } = resInfo?.[2]?.card?.card?.info;
   const { itemCards } =
     resInfo?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
@@ -79,5 +83,4 @@ const RestaurantMenu = () => {
     </div>
   );
 };
-
 export default RestaurantMenu;
