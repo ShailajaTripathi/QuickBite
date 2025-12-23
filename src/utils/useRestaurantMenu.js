@@ -13,7 +13,7 @@ const useRestaurantMenu = (resId) => {
 
     const menuData = json?.data?.cards;
    setResInfo(menuData);
-  //setResInfo(Mockdata.data.cards);
+  setResInfo(Mockdata.data.cards);
 
   };
   
