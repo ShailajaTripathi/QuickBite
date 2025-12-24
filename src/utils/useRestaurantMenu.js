@@ -10,7 +10,6 @@ const useRestaurantMenu = (resId) => {
     
     const data = await fetch(`${MENU_API} ${resId} &catalog_qa=undefined&submitAction=ENTER`);
     const json = await data?.json();
-
     const menuData = json?.data?.cards;
    setResInfo(menuData);
   //setResInfo(Mockdata.data.cards);

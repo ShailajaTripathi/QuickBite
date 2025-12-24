@@ -16,7 +16,8 @@ const Body = () => {
   const {loggedInUser}=useContext(UserContext);
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/namastedev/namaste-react/refs/heads/main/swiggy-api"
+      '/api/restaurant'
+      // "https://raw.githubusercontent.com/namastedev/namaste-react/refs/heads/main/swiggy-api"
       //"https://swiggy-api-4c740.web.app/swiggy-api.json"
       //"https://corsproxy.io/https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.198909&lng=77.7068926&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     )
@@ -29,7 +30,7 @@ const Body = () => {
         setListofrestaurant(resData);
         setFilteredRestaurant(resData);
 
-        //console.log("lsit", resData);
+        console.log("lsit", resData);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -68,7 +69,7 @@ const Body = () => {
                 res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
               );
               setFilteredRestaurant(filteredRestaurant);
-              console.log(filteredRestaurant, "search ka item");
+            
             }}
           >
             Search

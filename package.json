@@ -1,4 +1,8 @@
+
+
+
 {
+  "proxy": "http://localhost:8080",
   "name": "QuickBite",
   "version": "1.0.0",
   "description": "QuickBite by shailaja",
@@ -12,6 +16,7 @@
       "source": "App.js"
     }
   },
+  
   "keywords": [],
   "author": "Shailaja tripathi",
   "license": "ISC",
