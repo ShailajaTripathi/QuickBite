@@ -1,6 +1,6 @@
 # date 26/12/2025
 
-# QuickBite---
+# QuickBite
 
 
 # Features of this app
