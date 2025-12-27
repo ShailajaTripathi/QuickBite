@@ -1,6 +1,6 @@
 # date 27/12/2025
 
-# QuickBite
+# QuickBite food ordering app
 
 
 # Features of this app
