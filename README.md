@@ -1,6 +1,6 @@
 # date 2/1/2026
 
-# QuickBite food ordering app--------------------
+# QuickBite food ordering app
 
 
 # Features of this app
