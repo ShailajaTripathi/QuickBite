@@ -2,27 +2,26 @@
 
 # QuickBite food ordering app
 
-
 # Features of this app
 
-- Shows Top-Rated restaurants
-- Real data from APIs
-- Lazzy loading
-- Search restaurant
-- Routing with dynamic Error Page
-- Dynamic routing to show restaurant details
-- Custom hook and optimization
-- User's Online status
-- Lazy Loading for performance optimization
-- shimmer UI (dummy ui while loading to set user's mind )
-- Tailwind CSS
-- HOC for labeling pure veg
+- Shows Top-Rated restaurants.
+- Real data from APIs.
+- Lazzy loading.
+- Search restaurant.
+- Routing with dynamic Error Page.
+- Dynamic routing to show restaurant details.
+- Custom hook and optimization.
+- User's Online status.
+- Lazy Loading for performance optimization.
+- shimmer UI (dummy ui while loading to set user's mind ).
+- Tailwind CSS.
+- HOC for labeling pure veg.
 - Lifting state Up for Creating Menu with controlled & uncontrolled components.
-- Context API
+- Context API.
 
 # Parcel
 
-Do following things for us
+Do following things for us -
 
 - It will create Dev Build
 - Local server
