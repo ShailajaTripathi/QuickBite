@@ -5,20 +5,20 @@
 
 # Features of this app
 
-- Shows Top Rated restaurant
+- Shows Top-Rated restaurant
 - Real data from APIs
-- loading
-- shimmer UI (dummy ui while loading to set Users mind )
+- Lazzy loading
+- shimmer UI (dummy ui while loading to set users mind )
 - Search restaurant
 - Routing with dynamic Error Page
-- Dynamic routing
+- Dynamic routing to show restaurant details
 - Custom hook and optimization
-- User Online status
+- User's Online status
 - Lazy Loading
 - Tailwind CSS
 - HOC for labeling pure veg
-- Lifting state up for Creating Menu with controlled & uncontrolled components
-- context API
+- Lifting state Up for Creating Menu with controlled & uncontrolled components
+- Context API
 
 # Parcel
 
