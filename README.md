@@ -1,4 +1,4 @@
-# date 3/1/2026
+# Date 3/1/2026
 
 # QuickBite food ordering app
 
@@ -8,16 +8,16 @@
 - Shows Top-Rated restaurant
 - Real data from APIs
 - Lazzy loading
-- shimmer UI (dummy ui while loading to set users mind )
 - Search restaurant
 - Routing with dynamic Error Page
 - Dynamic routing to show restaurant details
 - Custom hook and optimization
 - User's Online status
-- Lazy Loading
+- Lazy Loading for performance optimization
+- shimmer UI (dummy ui while loading to set user's mind )
 - Tailwind CSS
 - HOC for labeling pure veg
-- Lifting state Up for Creating Menu with controlled & uncontrolled components
+- Lifting state Up for Creating Menu with controlled & uncontrolled components.
 - Context API
 
 # Parcel
