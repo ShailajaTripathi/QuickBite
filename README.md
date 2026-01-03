@@ -3,12 +3,12 @@
 # QuickBite food ordering app
 
 
-# Features of this app----------
+# Features of this app
 
-- Shows Top rated restaurant
-- Real data from Api
+- Shows Top Rated restaurant
+- Real data from APIs
 - loading
-- shimmer UI (dummy ui while loading to set users mind )
+- shimmer UI (dummy ui while loading to set Users mind )
 - Search restaurant
 - Routing with dynamic Error Page
 - Dynamic routing
@@ -22,12 +22,12 @@
 
 # Parcel
 
-do following things for us
+Do following things for us
 
-- it will create Dev Build
+- It will create Dev Build
 - Local server
 - HMR- Hot Module Replacement (automatic refresh browser)
-- File Watching Algorithm - written in c++
+- File Watching Algorithm - written in C++
 - Faster development experience(faster build) bcz of cache //.parcel-cache
 - Image optimization
 - Minification of files during build
