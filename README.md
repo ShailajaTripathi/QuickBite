@@ -3,7 +3,7 @@
 # QuickBite food ordering app
 
 
-# Features of this app---------------
+# Features of this app
 
 - Shows Top rated restaurant
 - Real data from Api
