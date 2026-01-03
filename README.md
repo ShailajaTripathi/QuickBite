@@ -5,7 +5,7 @@
 
 # Features of this app
 
-- Shows Top-Rated restaurant
+- Shows Top-Rated restaurants
 - Real data from APIs
 - Lazzy loading
 - Search restaurant
