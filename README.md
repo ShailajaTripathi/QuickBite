@@ -19,9 +19,9 @@
 - Lifting state Up for Creating Menu with controlled & uncontrolled components.
 - Context API.
 
-# Parcel
+# Parcel -------------
 
-Do following things for us -
+Do following things for us :
 
 - It will create Dev Build
 - Local server
