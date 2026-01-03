@@ -40,8 +40,7 @@ Do following things for us
 - provide HTTPs
 - Tree shaking - will remove unused code
 - Different bundles for dev and production
-
-- for more read documentation of parcel
+- ..for more read documentation of parcel
 
 # React is fast due to those bundlers(here is parcel)
 
