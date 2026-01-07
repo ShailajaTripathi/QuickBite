@@ -86,3 +86,4 @@ if we need to our data and UI Layer consistent to each other that is where react
 
 - it tries to find out the differnce b/w (nodes of ) old virtual DOM & New virtual DOM then it will update the actual dom on every render cycle
 # QuickBite
+---------------------------------------------------------------------------------
