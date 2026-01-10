@@ -1,8 +1,4 @@
-
-
-
 {
-  "proxy": "http://localhost:8080",
   "name": "QuickBite",
   "version": "1.0.0",
   "description": "QuickBite by shailaja",
@@ -16,7 +12,6 @@
       "source": "App.js"
     }
   },
-  
   "keywords": [],
   "author": "Shailaja tripathi",
   "license": "ISC",
@@ -28,9 +23,11 @@
     "tailwindcss": "^3.3.2"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.8.0"
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.20.0"
   },
   "browserslist": [
     "Last 2 versions"

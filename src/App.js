@@ -34,19 +34,22 @@ root.render(parent);
 import React, { useState, lazy, Suspense, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 //import "../index.css";
-import Header from "./components/Header.jsx";
-import Body from "./components/Body.jsx";
-//import About from "./components/About.jsx";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
-import Contact from "./components/Contact.jsx";
-import ErrorComponent from "./components/ErrorComponent.jsx";
-import RestaurantMenu from "./components/RestaurantMenu.jsx";
+import Header from "./components/common/Header.jsx";
+import Home from "./pages/Home.jsx";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import Contact from "./pages/Contact.jsx";
+import Cart from "./pages/Cart.jsx";
+import ErrorComponent from "./components/common/ErrorComponent.jsx";
+import RestaurantMenu from "./components/menu/RestaurantMenu.jsx";
 import "../index.css";
-import UserContext from "./utils/UserContext/UserContext.js";
+import { Provider } from "react-redux";
+import store from "./store/store";
+
+import {AuthContext, AuthProvider, UserContext} from "./utils/UserContext/UserContext.js";
 
 
 
-const About = lazy(() => import("./components/About.jsx")); //dynamic import of about component with lazy loading so that about component will loaded only when /about route visited
+const About = lazy(() => import("./pages/About.jsx")); //dynamic import of about component with lazy loading so that about component will loaded only when /about route visited
 
 //“MainFrame is a layout component used as a parent route in React Router to keep common UI like header constant and render page-specific content using Outlet.”
 const MainFrame = () => {       //this is layout component for header and outlet layout is created layout means common part of all pages in app              
@@ -59,14 +62,18 @@ const MainFrame = () => {       //this is layout component for header and outlet
   // }, []);
 
   return (
-    // wrapping entire app in context provider
-    <UserContext.Provider value={{ loggedInUser: userName,setUserName }}>
-      <div className="app"> 
-        <Header />
-        <Outlet />  
-    {/* “Outlet is used in layout routes to render child route components dynamically.” outlet is used to render children components of layout components */}
-      </div>
-    </UserContext.Provider>
+    // wrapping entire app in context and redux providers
+     <Provider store={store}>
+    <AuthProvider>
+      <UserContext.Provider value={{ loggedInUser: userName,setUserName }}>
+        <div className="app"> 
+          <Header />
+          <Outlet />  
+      {/* "Outlet is used in layout routes to render child route components dynamically." outlet is used to render children components of layout components */}
+        </div>
+      </UserContext.Provider>
+    </AuthProvider>
+    </Provider>
   );
 };  //creating layout component for header and outlet
 
@@ -75,7 +82,7 @@ const appRouter = createBrowserRouter([
     path: "/",
     element: <MainFrame />,   //layout component as parent route 
     children: [
-      { path: "/", element: <Body /> }, 
+      { path: "/", element: <Home /> }, 
       {
         path: "/about", // children to app route
         // this is  lazy loading or chunking or dynamic bundling or etc etc (all names on notes )
@@ -88,6 +95,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/restaurants/:resId",
