@@ -1,33 +1,33 @@
-# date 24/12/2025
-
-# QuickBite
+# Date 7/1/2026
 
 
-# Features of this app
+# QuickBite food ordering app
 
-- Shows Top rated restaurant
-- Real data from Api
-- loading
-- shimmer UI (dummy ui while loading to set users mind )
-- Search restaurant
-- Routing with dynamic Error Page
-- Dynamic routing
-- Custom hook and optimization
-- User Online status
-- Lazy Loading
-- Tailwind CSS
-- HOC for labeling pure veg
-- Lifting state up for Creating Menu with controlled & uncontrolled components
-- context API
+# Features of this app 
 
-# Parcel
+- Shows Top-Rated restaurants.
+- Real data from APIs.
+- Lazzy loading.
+- Search restaurant.
+- Routing with dynamic Error Page.
+- Dynamic routing to show restaurant details.
+- Custom hook and optimization.
+- User's Online status.
+- Lazy Loading for performance optimization.
+- shimmer UI (dummy ui while loading to set user's mind ).
+- Tailwind CSS.
+- HOC for labeling pure veg.
+- Lifting state Up for Creating Menu with controlled & uncontrolled components.
+- Context API.
 
-do following things for us
+# Parcel 
 
-- it will create Dev Build
+Do following things for us :
+
+- It will create Dev Build
 - Local server
 - HMR- Hot Module Replacement (automatic refresh browser)
-- File Watching Algorithm - written in c++
+- File Watching Algorithm - written in C++
 - Faster development experience(faster build) bcz of cache //.parcel-cache
 - Image optimization
 - Minification of files during build
@@ -40,8 +40,7 @@ do following things for us
 - provide HTTPs
 - Tree shaking - will remove unused code
 - Different bundles for dev and production
-
-- for more read documentation of parcel
+- ..for more read documentation of parcel
 
 # React is fast due to those bundlers(here is parcel)
 
@@ -87,3 +86,4 @@ if we need to our data and UI Layer consistent to each other that is where react
 
 - it tries to find out the differnce b/w (nodes of ) old virtual DOM & New virtual DOM then it will update the actual dom on every render cycle
 # QuickBite
+---------------------------------------------------------------------------------
