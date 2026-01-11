@@ -75,7 +75,7 @@ const Header = () => {
                 to="/cart"
                 className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
               >
-                🛒 Cart
+                🛒 Cart : {cartItems?.length} Items
               </Link>
             </li>
 
@@ -91,9 +91,7 @@ const Header = () => {
               </span>
             </div>
 
-            <div>
-              <p>Total Items: {cartItems?.length}</p>
-            </div>
+          
             {/* Login/Logout Button */}
             <button
               className={`px-6 py-2 font-bold rounded-lg transition-all shadow-md hover:shadow-lg ${

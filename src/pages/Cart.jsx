@@ -1,12 +1,16 @@
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import CartItem from "../components/cart/CartItem";
+ import { clearCart } from "../store/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
-const totalPrice = cartItems.reduce((total, item) => {
-  const price = item?.card?.info?.price ?? item?.card?.info?.defaultPrice ?? 0;
-  return total + price;
-}, 0) / 100;
+  const dispatch = useDispatch();
+
+  const totalPrice =
+    cartItems.reduce((total, item) => {
+      const price = item.card.info.price ?? item.card.info.defaultPrice ?? 0;
+      return total + price * item.quantity;
+    }, 0) / 100;
 
   // 🟡 EMPTY CART
   if (cartItems.length === 0) {
@@ -22,8 +26,20 @@ const totalPrice = cartItems.reduce((total, item) => {
 
   // 🟢 CART WITH ITEMS
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+    <div className="max-w-4xl mx-auto p-4 ">
+      <div className="flex justify-between items-center gap-3">
+        <div>
+          <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+        </div>
+        <div>
+          <button
+            onClick={() => dispatch(clearCart())}
+            className="bg-gray-600 text-white px-4 py-1 rounded"
+          >
+            Clear Cart
+          </button>
+        </div>
+      </div>
 
       <div className="space-y-4">
         {cartItems.map((item) => (
@@ -31,7 +47,7 @@ const totalPrice = cartItems.reduce((total, item) => {
         ))}
       </div>
       <div className="text-right font-bold text-xl mt-6">
-        Total Price : ₹  {totalPrice} /-
+        Total Price : ₹ {totalPrice} /-
       </div>
     </div>
   );
