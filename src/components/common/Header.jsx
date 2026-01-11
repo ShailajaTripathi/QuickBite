@@ -1,17 +1,15 @@
 import useOnlineStatus from "../../hooks/useOnlineStatus.js";
-import { UserContext, AuthContext } from "../../utils/UserContext/UserContext";
-import { useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import { LOGO_URL } from "../../utils/constant.js";
+import { useAuth } from "../../context/AuthContext.js";
 import { Link } from "react-router-dom";
-//use { } to import named export
 
 const Header = () => {
-   const cartItems = useSelector((store) => store.cart.items);
+  const cartItems = useSelector((store) => store.cart.items);
   const onlineStatus = useOnlineStatus();
-  const { loggedInUser } = useContext(UserContext);
-  const { isLoggedIn, login, logout } = useContext(AuthContext);
-
+  // const { loggedInUser } = useContext(UserContext);
+  const loggedInUser = JSON.parse(localStorage.getItem("user"))?.name;
+  const { user, logout } = useAuth();
   return (
     <div className="header sticky top-0 z-50 bg-white shadow-lg border-b-4 border-green-600">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -78,7 +76,6 @@ const Header = () => {
                 🛒 Cart : {cartItems?.length} Items
               </Link>
             </li>
-
           </ul>
 
           {/* Right Side Items */}
@@ -91,8 +88,11 @@ const Header = () => {
               </span>
             </div>
 
-          
             {/* Login/Logout Button */}
+            {/* <Link
+                to="/auth"
+            >
+
             <button
               className={`px-6 py-2 font-bold rounded-lg transition-all shadow-md hover:shadow-lg ${
                 isLoggedIn
@@ -103,6 +103,17 @@ const Header = () => {
             >
               {isLoggedIn ? "Logout" : "Login"}
             </button>
+            </Link> */}
+
+            {user ? (
+              <button onClick={logout} className="px-4 py-1 border rounded">
+                Logout
+              </button>
+            ) : (
+              <Link to="/auth" className="px-4 py-1 border rounded">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

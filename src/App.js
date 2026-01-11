@@ -34,6 +34,7 @@ root.render(parent);
 import React, { useState, lazy, Suspense, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 //import "../index.css";
+import ProtectedRoute from "./components/common/ProtedRoute.jsx";
 import Header from "./components/common/Header.jsx";
 import Home from "./pages/Home.jsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
@@ -44,50 +45,51 @@ import RestaurantMenu from "./components/menu/RestaurantMenu.jsx";
 import "../index.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
-
-import {AuthContext, AuthProvider, UserContext} from "./utils/UserContext/UserContext.js";
-
+import Auth from "./pages/Auth.jsx";
+import { AuthProvider } from "./context/AuthContext.js";
 
 
 const About = lazy(() => import("./pages/About.jsx")); //dynamic import of about component with lazy loading so that about component will loaded only when /about route visited
 
 //“MainFrame is a layout component used as a parent route in React Router to keep common UI like header constant and render page-specific content using Outlet.”
-const MainFrame = () => {       //this is layout component for header and outlet layout is created layout means common part of all pages in app              
-  const [userName, setUserName] = useState(""); //state to hold user name
+const MainFrame = () => {
+  //this is layout component for header and outlet layout is created layout means common part of all pages in app
   // useEffect(() => {
   //   const data = {
   //     name: "Shailaja",
-  //   }; 
+  //   };
   //   setUserName(data?.name); // setting username from data
   // }, []);
 
   return (
     // wrapping entire app in context and redux providers
-     <Provider store={store}>
-    <AuthProvider>
-      <UserContext.Provider value={{ loggedInUser: userName,setUserName }}>
-        <div className="app"> 
-          <Header />
-          <Outlet />  
-      {/* "Outlet is used in layout routes to render child route components dynamically." outlet is used to render children components of layout components */}
-        </div>
-      </UserContext.Provider>
-    </AuthProvider>
-    </Provider>
-  );
-};  //creating layout component for header and outlet
 
-const appRouter = createBrowserRouter([    
+      <Provider store={store}>
+        <AuthProvider>
+         
+            <div className="app">
+              {/* <RouterProvider router={appRouter} /> */}
+              <Header />
+              <Outlet />
+              {/* "Outlet is used in layout routes to render child route components dynamically." outlet is used to render children components of layout components */}
+            </div>
+        </AuthProvider>
+      </Provider>
+  );
+}; //creating layout component for header and outlet
+
+const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <MainFrame />,   //layout component as parent route 
+    element: <MainFrame />, //layout component as parent route
     children: [
-      { path: "/", element: <Home /> }, 
+      { path: "/", element: <Home /> },
       {
         path: "/about", // children to app route
         // this is  lazy loading or chunking or dynamic bundling or etc etc (all names on notes )
-        element: (     //suspense is used to wrap lazy loaded components. fallback is used to show something till the component is loading 
-          <Suspense fallback={<h1>Loading....</h1>}>    
+        //suspense is used to wrap lazy loaded components. fallback is used to show something till the component is loading
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
             <About />
           </Suspense>
         ),
@@ -98,8 +100,15 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element:  <ProtectedRoute>
+      <Cart />
+    </ProtectedRoute>,
       },
+      {
+        path: "/auth",
+        element: <Auth />,
+      },
+
       {
         path: "/restaurants/:resId",
         element: <RestaurantMenu />,
@@ -108,6 +117,6 @@ const appRouter = createBrowserRouter([
     errorElement: <ErrorComponent />, //when route is not found this component will be shown with error message.
   },
 ]);
-const root = ReactDOM.createRoot(document.getElementById("root"));  //creating root using reactdom 18 way,this is the first step of rendering react app by getting root element from index.html
+const root = ReactDOM.createRoot(document.getElementById("root")); //creating root using reactdom 18 way,this is the first step of rendering react app by getting root element from index.html
 root.render(<RouterProvider router={appRouter} />); //providing entire app to routerprovider
 // this means “Hey React, use these rules to control what UI to show based on URL.”
