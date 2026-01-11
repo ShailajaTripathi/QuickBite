@@ -1,4 +1,6 @@
-import RestaurantCard, { withVegLabel } from "../components/restaurant/RestaurantCard.jsx";
+import RestaurantCard, {
+  withVegLabel,
+} from "../components/restaurant/RestaurantCard.jsx";
 import { useEffect, useState, useContext } from "react";
 import Shimmer from "../components/common/Shimmer.jsx";
 import { Link } from "react-router-dom";
@@ -106,7 +108,9 @@ const Home = () => {
                 className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
                 onClick={() => {
                   const filteredRestaurant = listofRestaurant?.filter((res) =>
-                    res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+                    res?.info?.name
+                      .toLowerCase()
+                      .includes(searchText.toLowerCase())
                   );
                   setFilteredRestaurant(filteredRestaurant);
                 }}
@@ -114,17 +118,18 @@ const Home = () => {
                 Search
               </button>
             </div>
-{console.log("Filtered Restaurant Render:", filteredRestaurant)}
+          
             {/* Top Rated Button */}
             <div className="flex justify-center">
               <button
-                className="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all"
+                className="px-6 py-2 bg-gradient-to-r from-green-400 to-red-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all"
                 onClick={() => {
                   const filteredList = filteredRestaurant?.filter(
                     (res) => res?.info?.avgRating >= 4
                   );
-                  setListofrestaurant(filteredList);
-                  console.log("Top Rated Clicked", filteredList?.[1]?.info?.avgRating);
+                  // setListofrestaurant(filteredList); //
+                  setFilteredRestaurant(filteredList);
+                 
                 }}
               >
                 ⭐ Top Rated

@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../store/cartSlice";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const dispatch = useDispatch();
   // Load user on refresh
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -27,10 +29,13 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  };
+
+const logout = () => {
+  localStorage.removeItem("user");   // auth remove
+  dispatch(clearCart());             // cart empty
+  setUser(null);   // context reset
+};
+
 
   return (
     <AuthContext.Provider value={{ user, signup, login, logout }}>

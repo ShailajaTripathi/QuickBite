@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const Auth = () => {
   const { signup, login } = useAuth();
   const navigate = useNavigate();
-
   const [isSignup, setIsSignup] = useState(true);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -65,12 +64,12 @@ const Auth = () => {
       </form>
 
       <p
-        className="text-center mt-4 cursor-pointer text-green-600"
+        className={`text-center mt-4 cursor-pointer ${isSignup ? "text-green-600" : "text-blue-600"}`}
         onClick={() => setIsSignup(!isSignup)}
       >
         {isSignup
           ? "Already have an account? Login"
-          : "New user? Sign up"}
+          : "New user ? Sign up"}
       </p>
     </div>
   );

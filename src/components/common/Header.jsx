@@ -4,6 +4,7 @@ import { LOGO_URL } from "../../utils/constant.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { Link } from "react-router-dom";
 
+
 const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const onlineStatus = useOnlineStatus();
@@ -106,11 +107,11 @@ const Header = () => {
             </Link> */}
 
             {user ? (
-              <button onClick={logout} className="px-4 py-1 border rounded">
+              <button onClick={logout} className="px-4 py-1 border rounded bg-gradient-to-r from-green-500 to-red-400 text-white">
                 Logout
               </button>
             ) : (
-              <Link to="/auth" className="px-4 py-1 border rounded">
+              <Link to="/auth" className="px-4 py-1 border rounded bg-gradient-to-r from-green-400 to-red-500 text-white">
                 Login
               </Link>
             )}
