@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
 
 const logout = () => {
-  localStorage.removeItem("user");   // auth remove
+  // localStorage.removeItem("user");   // auth remove
   dispatch(clearCart());             // cart empty
   setUser(null);   // context reset
 };

@@ -22,10 +22,8 @@ const Home = () => {
 
       .then((data) => {
         // promise chainging to get data
-
         // The API returns an array directly
         let resData = null;
-
         // If data is already an array, use it directly
         if (Array.isArray(data)) {
           // Transform flat structure to match expected format with 'info' wrapper
@@ -110,7 +108,6 @@ const Home = () => {
                   const filteredRestaurant = listofRestaurant?.filter((res) =>
                     res?.info?.name
                       .toLowerCase()
-
                       .includes(searchText.toLowerCase())
                   ); 
                   setFilteredRestaurant(filteredRestaurant);
@@ -119,7 +116,7 @@ const Home = () => {
               >
                 Search
               </button>
-              <button className="px-2 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md" onClick={() => {
+              <button className="px-2 py-2 border-green-500 font-semibold rounded-lg hover:bg-green-700 hover:text-white transition-colors shadow-md" onClick={() => {
                 setSearchText("");
                 setFilteredRestaurant(listofRestaurant);
               }}>Clear All</button>

@@ -105,7 +105,7 @@ const appRouter = createBrowserRouter([
     </ProtectedRoute>,
       },
       {
-        path: "/auth",
+        path: "/login",
         element: <Auth />,
       },
 

@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../store/cartSlice.js";
 import { itemImageMap } from "../../utils/constant.js";
 import { MENU_IMAGE_URL } from "../../utils/constant.js";
+import { useAuth } from "../../context/AuthContext.js";
 
 const ItemList = ({ data }) => {
-
+const { user } = useAuth();
   const dispatch = useDispatch();
   const cartItems = useSelector((store) => store.cart.items);
 
@@ -17,6 +18,13 @@ const ItemList = ({ data }) => {
 
     // setTimeout(() => setAddedItemId(null), 2000);
   };
+  const handleRemove = (e, item) => {
+    e.stopPropagation();
+    // dispatch(removeItem(item.card.info.id));
+    // Indicate item was removed
+    // Reset back to "Add to Cart" after 2 seconds
+    console.log("remove item called");
+  }
 
   console.log("dataaaa itemlist", data);
 
@@ -124,17 +132,17 @@ const ItemList = ({ data }) => {
               />
               {/* ADD Button */}
               <button
-                onClick={(e) => handleAdd(e, item)}
+                onClick={(e) => { isItemInCart ? handleAdd(e, item) : handleRemove(e, item) }}
                 disabled={isItemInCart}
                 className={`absolute -bottom-3 right-0 px-4 py-1 rounded-lg font-bold shadow-lg transition-all
     ${
       isItemInCart
-        ? "bg-green-600 text-white border-2 border-green-600 cursor-not-allowed"
+        ? "bg-red-500 text-white border-2 "
         : "bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white"
     }
   `}
               >
-                {isItemInCart ? "✓ ADDED" : "ADD"}
+                {isItemInCart ? "Remove" : "ADD"}
               </button>
             </div>
           </div>
