@@ -2,8 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../store/cartSlice";
 
-const AuthContext = createContext();
-
+ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();

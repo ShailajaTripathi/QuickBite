@@ -8,13 +8,13 @@ const Auth = () => {
   const [isSignup, setIsSignup] = useState(true);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!email) {
-      setError("Email is required");
+      setEmailError("Email is required");
       return;
     }
 
@@ -26,7 +26,7 @@ const Auth = () => {
       if (success) {
         navigate("/");
       } else {
-        setError("User not found. Please signup first.");
+        setEmailError("User not found. Please signup first.");
       }
     }
   };
@@ -56,7 +56,7 @@ const Auth = () => {
           className="w-full border p-2 rounded"
         />
 
-        {error && <p className="text-red-500">{error}</p>}
+        {emailError && <p className="text-red-500">{emailError}</p>}
 
         <button className="bg-green-600 text-white px-4 py-2 rounded w-full">
           {isSignup ? "Sign Up" : "Login"}

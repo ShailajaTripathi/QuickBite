@@ -53,9 +53,15 @@ const About = () => {
         <p className="text-gray-700">
           I designed and developed the application end-to-end, including
           frontend architecture, Redux state management, backend APIs, and
-          performance optimizations.
+          performance optimizations.      
         </p>
       </section>
+        <section className="mt-6">
+        <h2 className="text-xl font-semibold mb-2">Closing Thoughts</h2>
+      <p className="text-gray-700">This project was built to strengthen real-world React concepts and production-level application architecture.<br/>
+       Thank you for exploring QuickBite! Your feedback is welcome.</p>
+      </section>
+    
     </div>
   );
 };

@@ -105,20 +105,26 @@ const Home = () => {
                 placeholder="Search restaurants..."
               />
               <button
-                className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
+                className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
                 onClick={() => {
                   const filteredRestaurant = listofRestaurant?.filter((res) =>
                     res?.info?.name
                       .toLowerCase()
+
                       .includes(searchText.toLowerCase())
-                  );
+                  ); 
                   setFilteredRestaurant(filteredRestaurant);
+                  setSearchText("");
                 }}
               >
                 Search
               </button>
+              <button className="px-2 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md" onClick={() => {
+                setSearchText("");
+                setFilteredRestaurant(listofRestaurant);
+              }}>Clear All</button>
             </div>
-          
+
             {/* Top Rated Button */}
             <div className="flex justify-center">
               <button

@@ -11,6 +11,8 @@ const Header = () => {
   // const { loggedInUser } = useContext(UserContext);
   const loggedInUser = JSON.parse(localStorage.getItem("user"))?.name;
   const { user, logout } = useAuth();
+
+
   return (
     <div className="header sticky top-0 z-50 bg-white shadow-lg border-b-4 border-green-600">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">

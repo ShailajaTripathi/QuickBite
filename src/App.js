@@ -65,7 +65,7 @@ const MainFrame = () => {
     // wrapping entire app in context and redux providers
 
       <Provider store={store}>
-        <AuthProvider>
+        <AuthProvider >
          
             <div className="app">
               {/* <RouterProvider router={appRouter} /> */}
