@@ -1,4 +1,6 @@
 import ItemList from "./ItemList.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
 
 const RestaurantCategory = ({showItems,setShowIndex,...data}) => {
@@ -22,7 +24,7 @@ const handleClick =()=>{
             <p className="text-sm text-gray-500">({data?.category?.itemCards.length} items)</p>
           </div>
           <span className="text-2xl text-green-600 transition-transform duration-300 transform">
-            {showItems ? "▼" : "▶"}
+            {showItems ? <FontAwesomeIcon icon={faCaretDown} /> : <FontAwesomeIcon icon={faCaretRight} />}
           </span>
         </div>
         

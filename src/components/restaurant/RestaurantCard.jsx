@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSeedling, faLeaf } from "@fortawesome/free-solid-svg-icons";
+
 const RestaurantCard = (props) => {
   // Handle both full URL and cloudinary ID
 const {name, cloudinaryImageId, cuisines, avgRating, costForTwo, sla, isOpen} = props?.resData?.info;
@@ -64,7 +67,10 @@ export const withVegLabel = (RestaurantCard) => { // HoC function that takes Res
   return (props) => {
     return <div className="relative">
       <label className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full text-sm font-semibold z-10 shadow-md">
-       🟩 
+{/* Option A: Just a green leaf */}
+      <FontAwesomeIcon icon={faLeaf} className="text-green-600" />
+      <span className="text-green-600 font-bold text-sm">PURE VEG</span>
+       
       </label>
       <RestaurantCard {...props} /> 
          </div>;

@@ -1,7 +1,8 @@
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/cart/CartItem";
- import { clearCart } from "../store/cartSlice";
-
+import { clearCart } from "../store/cartSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping, faTrash } from "@fortawesome/free-solid-svg-icons";
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ const Cart = () => {
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh]">
-        <h2 className="text-2xl font-bold mb-2">Your cart is empty 🛒</h2>
+        <h2 className="text-2xl font-bold mb-2">
+          Your cart is empty <FontAwesomeIcon icon={faCartShopping} />
+        </h2>
         <p className="text-gray-500">
           Add items from the menu to see them here.
         </p>

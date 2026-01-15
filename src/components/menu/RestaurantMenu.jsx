@@ -3,7 +3,8 @@ import Shimmer from "../common/Shimmer";  // default import
 import useRestaurantMenu from "../../hooks/useRestaurantMenu";
 import { useParams } from "react-router-dom";
 import RestaurantCategory from "./RestaurantCategory";
-                             
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWallet, faUtensils } from "@fortawesome/free-solid-svg-icons";          
 
   const RestaurantMenu = () => {
   // const [showItems, setShowItems] = useState(false);
@@ -34,16 +35,16 @@ import RestaurantCategory from "./RestaurantCategory";
         <div className="max-w-6xl mx-auto px-4 py-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-3">{name}</h1>
           <div className="flex items-center gap-2 text-gray-600 text-lg">
-            <span className="font-semibold">🍴 {cuisines.join(", ")}</span>
+            <span className="font-semibold"> <FontAwesomeIcon icon={faUtensils}/> {cuisines.join(", ")}</span>
             <span className="mx-2">•</span>
-            <span className="font-semibold">💰 ₹{costForTwo} for Two</span>
+            <span className="font-semibold"> <FontAwesomeIcon icon={faWallet}/> ₹{costForTwo} for Two</span>
           </div>
         </div>
       </div>
 
       {/* Menu Categories */}
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">📋 Menu ({categories?.length})</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6"><i className="fa-solid fa-list"></i> Menu ({categories?.length})</h2>
         {categories?.map((category, index) => (
           <RestaurantCategory
             key={category?.card?.card?.categoryId}

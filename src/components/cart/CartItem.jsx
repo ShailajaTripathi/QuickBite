@@ -38,8 +38,9 @@
 
 
 import { useDispatch } from "react-redux";
-import { addItem, removeItem } from "../../store/cartSlice";
-
+import { addItem, deleteItem } from "../../store/cartSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   const { name, price, defaultPrice,imageId } = item.card.info;
@@ -75,6 +76,13 @@ const CartItem = ({ item }) => {
           className="px-3 py-1 bg-green-500 text-white rounded"
         >
           +
+        </button>
+        <button
+          onClick={() => dispatch(deleteItem(item.card.info.id))}
+          className="ml-4 text-red-600 hover:text-red-800 focus:outline-none"
+          title="Remove Item"
+        >
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     </div>

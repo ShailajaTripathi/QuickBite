@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem,deleteItem } from "../../store/cartSlice.js";
+import { addItem, deleteItem } from "../../store/cartSlice.js";
 import { itemImageMap } from "../../utils/constant.js";
 import { MENU_IMAGE_URL } from "../../utils/constant.js";
 import { useAuth } from "../../context/AuthContext.js";
 
 const ItemList = ({ data }) => {
-const { user } = useAuth();
+  const { user } = useAuth();
   const dispatch = useDispatch();
   const cartItems = useSelector((store) => store.cart.items);
 
-const handleCart=(e,item, isItemInCart)=>{
-  e.stopPropagation();
-  if(user){
-    dispatch(addItem(item));
-  }else{
-    alert("Please login to add items to cart")
-  }
-  if(isItemInCart){
-    dispatch(deleteItem(item?.card?.info?.id));
-  }
-} 
+  const handleCart = (e, item, isItemInCart) => {
+    e.stopPropagation();
+    if (user) {
+      dispatch(addItem(item));
+    } else {
+      alert("Please login to add items to cart");
+    }
+    if (isItemInCart) {
+      dispatch(deleteItem(item?.card?.info?.id));
+    }
+  };
 
   // Dish-specific image URLs with real food pictures - high quality
 
@@ -97,7 +97,7 @@ const handleCart=(e,item, isItemInCart)=>{
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {item?.card?.info?.isVeg ? "🌱 Veg" : "🍗 Non-Veg"}
+                    {item?.card?.info?.isVeg ? (<i className="fa-solid fa-leaf text-green-600 mr-2"></i>) : (<i className="fa-solid fa-drumstick-bite text-red-600 mr-2"></i>)} {item?.card?.info?.isVeg ? "Veg" : "Non-Veg"}
                   </span>
                 </div>
               )}
@@ -126,7 +126,9 @@ const handleCart=(e,item, isItemInCart)=>{
               />
               {/* ADD Button */}
               <button
-                onClick={(e) => {handleCart(e, item, isItemInCart) }}
+                onClick={(e) => {
+                  handleCart(e, item, isItemInCart);
+                }}
                 // disabled={isItemInCart}
                 className={`absolute -bottom-3 right-0 px-4 py-1 rounded-lg font-bold shadow-lg transition-all
     ${

@@ -54,13 +54,6 @@ const About = lazy(() => import("./pages/About.jsx")); //dynamic import of about
 //“MainFrame is a layout component used as a parent route in React Router to keep common UI like header constant and render page-specific content using Outlet.”
 const MainFrame = () => {
   //this is layout component for header and outlet layout is created layout means common part of all pages in app
-  // useEffect(() => {
-  //   const data = {
-  //     name: "Shailaja",
-  //   };
-  //   setUserName(data?.name); // setting username from data
-  // }, []);
-
   return (
     // wrapping entire app in context and redux providers
 

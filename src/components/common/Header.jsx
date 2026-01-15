@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { LOGO_URL } from "../../utils/constant.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faInfoCircle, faHeadset, faUser, faCartShopping,faGaugeHigh } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -46,7 +48,8 @@ const Header = () => {
                 to="/"
                 className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
               >
-                🏠 Home
+           <FontAwesomeIcon icon={faHouse} /> Home
+            
               </Link>
             </li>
 
@@ -56,7 +59,7 @@ const Header = () => {
                 to="/about"
                 className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
               >
-                ℹ️ About
+                <FontAwesomeIcon icon={faInfoCircle} /> About
               </Link>
             </li>
 
@@ -66,7 +69,7 @@ const Header = () => {
                 to="/contact"
                 className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
               >
-                📞 Contact
+                <FontAwesomeIcon icon={faHeadset}/> Contact
               </Link>
             </li>
 
@@ -77,9 +80,10 @@ const Header = () => {
                   className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
                 >
                   <span className="relative">
-                    🛒{" "}
+              <FontAwesomeIcon icon={faCartShopping} />
+
                     {!!cartItems?.length && (
-                      <span className="absolute top-0 right-0 bg-red-500 p-1 leading-[4px] rounded-full text-[8px] text-white">
+                      <span className="absolute top-0 right-0 bg-green-500 p-1 leading-[4px] rounded-full text-[8px] text-white">
                         {cartItems?.length}
                       </span>
                     )}
@@ -94,7 +98,7 @@ const Header = () => {
             {/* User Profile */}
             {user && (
               <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
-                <span className="text-lg">👤</span>
+                <FontAwesomeIcon icon={faUser}/>
                 <span className="font-semibold text-gray-800 text-sm">
                   {loggedInUser}
                 </span>
