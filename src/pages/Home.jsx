@@ -8,9 +8,11 @@ import useOnlineStatus from "../hooks/useOnlineStatus.js";
 
 const Home = () => {
   // state variable - superpowerful variable
-  const [listofRestaurant, setListofrestaurant] = useState([]); // destructure
-  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+  const [listofRestaurant, setListofrestaurant] = useState(null); // destructure
+  const [filteredRestaurant, setFilteredRestaurant] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [searched, setSearched] = useState(false);
+  const [ratingFilter, setRatingFilter] = useState(false);
   const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard); // HOC call to get new component with veg label to display pure veg restaurant
 
   useEffect(() => {
@@ -93,67 +95,82 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
             {/* Search Section */}
             <div className="flex gap-2">
-              <input
-                type="text"
-                value={searchText}
-                onChange={(e) => {
-                  setSearchText(e.target.value);
-                }}
-                className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition-colors"
-                placeholder="Search restaurants..."
-              />
-              <button
-                className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
-                onClick={() => {
-                  const filteredRestaurant = listofRestaurant?.filter((res) =>
-                    res?.info?.name
-                      .toLowerCase()
-                      .includes(searchText.toLowerCase())
-                  ); 
-                  setFilteredRestaurant(filteredRestaurant);
-                  setSearchText("");
-                }}
-              >
-                Search
-              </button>
-              <button className="px-2 py-2 border-green-500 font-semibold rounded-lg hover:bg-green-700 hover:text-white transition-colors shadow-md" onClick={() => {
-                setSearchText("");
-                setFilteredRestaurant(listofRestaurant);
-              }}>Clear All</button>
+              <div className="relative flex items-center flex-1">
+                <input
+                  type="text"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  className="w-full px-4 py-2 pr-10 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition-colors"
+                  placeholder="Search restaurants..."
+                />
+
+                {/* Clear "X" Button */}
+                {searchText && (
+                  <button
+                    onClick={() => setSearchText("")}
+                    className="absolute right-3 text-gray-500 hover:text-gray-700 focus:outline-none text-xl font-bold"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+              {searchText && (
+                <button
+                  className="px-6 py-2 bg-green-400 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-md"
+                  onClick={() => {
+                    const filteredRestaurant = listofRestaurant?.filter((res) =>
+                      res?.info?.name
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase())
+                    );
+                    setSearched(true);
+                    setFilteredRestaurant(filteredRestaurant);
+                    setSearchText("");
+                  }}
+                >
+                  Search
+                </button>
+              )}
+              {(searched || ratingFilter) && (
+                <button
+                  className="px-2 py-2 border-green-500 font-semibold rounded-lg transition-colors shadow-md"
+                  onClick={() => {
+                    setRatingFilter(false);
+                    setSearchText("");
+                    setFilteredRestaurant(listofRestaurant);
+                  }}
+                >
+                  Clear All
+                </button>
+              )}
             </div>
 
             {/* Top Rated Button */}
             <div className="flex justify-center">
-              <button
-                className="px-6 py-2 bg-gradient-to-r from-green-400 to-red-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all"
-                onClick={() => {
-                  const filteredList = filteredRestaurant?.filter(
-                    (res) => res?.info?.avgRating >= 4
-                  );
-                  // setListofrestaurant(filteredList); //
-                  setFilteredRestaurant(filteredList);
-                 
-                }}
-              >
-                ⭐ Top Rated
-              </button>
-            </div>
+              {!ratingFilter && (
+                <button
+                  className="px-6 py-2 border rounded-lg font-semibold hover:shadow-lg transition-all shadow-md"
+                  onClick={() => {
+                    setRatingFilter(!ratingFilter);
 
-            {/* User Name Section */}
-            {/* <div className="flex justify-end">
-              <div className="flex gap-2 items-center">
-                <label className="font-semibold text-gray-700">User:</label>
-                <input
-                  type="text"
-                  className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="Your Name"
-                  value={loggedInUser}
-                  onChange={(e) => {
-                    setUserName(e.target.value);
+                    // 1. Filter the restaurants (keep only 4.0+)
+                    const topRated = filteredRestaurant?.filter(
+                      (res) => res?.info?.avgRating >= 4
+                    );
+
+                    // 2. Sort them in descending order (highest rating first)
+                    const sortedList = [...topRated].sort((a, b) => {
+                      return b?.info?.avgRating - a?.info?.avgRating;
+                    });
+
+                    // 3. Update the state
+                    setFilteredRestaurant(sortedList);
                   }}
-                />
-              </div>
-            </div> */}
+                >
+                  🍴 Top Rated Dining
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -164,20 +181,24 @@ const Home = () => {
           🍽️ Popular Restaurants
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredRestaurant?.map((restaurant) => (
-            <Link
-              key={String(restaurant?.info?.id)}
-              to={`/restaurants/${restaurant?.info?.id}`} // dynamic routing
-              className="no-underline"
-            >
-              {/* if restaurant is pure veg then add pure veg label to it --   info?.isVeg ===true */}
-              {restaurant?.info?.veg === true ? (
-                <RestaurantCardWithVegLabel resData={restaurant} />
-              ) : (
-                <RestaurantCard resData={restaurant} />
-              )}
-            </Link>
-          ))}
+          {filteredRestaurant !== null ? (
+            filteredRestaurant?.map((restaurant) => (
+              <Link
+                key={String(restaurant?.info?.id)}
+                to={`/restaurants/${restaurant?.info?.id}`} // dynamic routing
+                className="no-underline"
+              >
+                {/* if restaurant is pure veg then add pure veg label to it --   info?.isVeg ===true */}
+                {restaurant?.info?.veg === true ? (
+                  <RestaurantCardWithVegLabel resData={restaurant} />
+                ) : (
+                  <RestaurantCard resData={restaurant} />
+                )}
+              </Link>
+            ))
+          ) : (
+            <h1>No restaurant found</h1>
+          )}
         </div>
       </div>
     </div>

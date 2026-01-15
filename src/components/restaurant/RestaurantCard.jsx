@@ -63,8 +63,8 @@ export const withVegLabel = (RestaurantCard) => { // HoC function that takes Res
 
   return (props) => {
     return <div className="relative">
-      <label className="absolute top-3 left-3 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-10 shadow-md">
-       🔖 Pure Veg 
+      <label className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full text-sm font-semibold z-10 shadow-md">
+       🟩 
       </label>
       <RestaurantCard {...props} /> 
          </div>;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../store/cartSlice.js";
+import { addItem,deleteItem } from "../../store/cartSlice.js";
 import { itemImageMap } from "../../utils/constant.js";
 import { MENU_IMAGE_URL } from "../../utils/constant.js";
 import { useAuth } from "../../context/AuthContext.js";
@@ -10,23 +10,17 @@ const { user } = useAuth();
   const dispatch = useDispatch();
   const cartItems = useSelector((store) => store.cart.items);
 
-  const handleAdd = (e, item) => {
-    e.stopPropagation();
+const handleCart=(e,item, isItemInCart)=>{
+  e.stopPropagation();
+  if(user){
     dispatch(addItem(item));
-    // Indicate item was added
-    // Reset back to "Add to Cart" after 2 seconds
-
-    // setTimeout(() => setAddedItemId(null), 2000);
-  };
-  const handleRemove = (e, item) => {
-    e.stopPropagation();
-    // dispatch(removeItem(item.card.info.id));
-    // Indicate item was removed
-    // Reset back to "Add to Cart" after 2 seconds
-    console.log("remove item called");
+  }else{
+    alert("Please login to add items to cart")
   }
-
-  console.log("dataaaa itemlist", data);
+  if(isItemInCart){
+    dispatch(deleteItem(item?.card?.info?.id));
+  }
+} 
 
   // Dish-specific image URLs with real food pictures - high quality
 
@@ -132,8 +126,8 @@ const { user } = useAuth();
               />
               {/* ADD Button */}
               <button
-                onClick={(e) => { isItemInCart ? handleAdd(e, item) : handleRemove(e, item) }}
-                disabled={isItemInCart}
+                onClick={(e) => {handleCart(e, item, isItemInCart) }}
+                // disabled={isItemInCart}
                 className={`absolute -bottom-3 right-0 px-4 py-1 rounded-lg font-bold shadow-lg transition-all
     ${
       isItemInCart
