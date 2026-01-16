@@ -4,7 +4,7 @@ import { LOGO_URL } from "../../utils/constant.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faInfoCircle, faHeadset, faUser, faCartShopping,faGaugeHigh } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faInfoCircle, faHeadset, faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);

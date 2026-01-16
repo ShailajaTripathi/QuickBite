@@ -30,7 +30,8 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "redux-saga": "^1.4.2"
   },
   "browserslist": [
     "Last 2 versions"
