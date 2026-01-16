@@ -173,9 +173,7 @@ const Home = () => {
                 </button>
               )}
             </div>
- <p className="text-gray-500 mb-4">
-            {filteredRestaurant?.length} restaurants available
-          </p>
+ 
             {/* Top Rated Button */}
             <div className="flex justify-center">
               {!ratingFilter && (
