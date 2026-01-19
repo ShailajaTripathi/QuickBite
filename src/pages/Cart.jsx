@@ -13,19 +13,7 @@ const Cart = () => {
 
   const cartItems = useSelector((store) => store.cart.items);
   
-  const handleClearCart = () => {
-    Swal.fire({
-      title: "Clear cart?",
-      text: "All items will be removed",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Clear",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(clearCart());
-      }
-    });
-  };
+
 
 
   // 🟡 EMPTY CART
