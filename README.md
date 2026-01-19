@@ -107,9 +107,9 @@ The goal of this project is to simulate how a modern food delivery app works whi
 
 ```bash
 git clone https://github.com/ShailajaTripathi/QuickBite
-cd quickbite
+cd QuickBite
 npm install
-npm start
+npm run start
 
 ```
 | Pages | Alert |
