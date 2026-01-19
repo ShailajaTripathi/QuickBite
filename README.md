@@ -111,8 +111,8 @@ cd quickbite
 npm install
 npm start
 
-![Dashboard](./src/assets/Screenshot%20(131).png)
-![Menu](./src/assets/Screenshot%20(132).png)
-![RemoveItem](./src/assets/Screenshot%20(133).png)
-![Logout](./src/assets/Screenshot%20(134).png)
-
+```
+| Pages | Alert |
+|-------|--------|
+|![Dashboard](./src/assets/Screenshot%20(133).png)| ![Menu](./src/assets/Screenshot%20(132).png)|
+|![Menu](./src/assets/Screenshot%20(131).png)|![Menu](./src/assets/Screenshot%20(134).png)|
