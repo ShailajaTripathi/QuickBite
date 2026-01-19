@@ -4,15 +4,18 @@ import { LOGO_URL } from "../../utils/constant.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faInfoCircle, faHeadset, faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHouse,
+  faInfoCircle,
+  faHeadset,
+  faUser,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
 import { selectCartCount } from "../../store/cartSelectors.js";
-
 
 const Header = () => {
   const cartCount = useSelector(selectCartCount);
-  // const cartItems = useSelector((store) => store.cart.items);
   const onlineStatus = useOnlineStatus();
-  // const { loggedInUser } = useContext(UserContext);
   const loggedInUser = JSON.parse(localStorage.getItem("user"))?.name;
   const { user, logout } = useAuth();
 
@@ -37,22 +40,13 @@ const Header = () => {
         {/* Navigation Items */}
         <div className="flex items-center gap-8">
           <ul className="hidden md:flex items-center gap-6 list-none m-0 p-0">
-            {/* Online Status
-            <li className="flex items-center gap-2 font-semibold text-gray-700">
-              <span>Status:</span>
-              <span className="text-xl">
-                {onlineStatus ? "🟢 Online" : "🔴 Offline"}
-              </span>
-            </li> */}
-
             {/* Home Link */}
             <li className="group">
               <Link
                 to="/"
                 className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
               >
-           <FontAwesomeIcon icon={faHouse} /> Home
-            
+                <FontAwesomeIcon icon={faHouse} /> Home
               </Link>
             </li>
 
@@ -72,7 +66,7 @@ const Header = () => {
                 to="/contact"
                 className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
               >
-                <FontAwesomeIcon icon={faHeadset}/> Contact
+                <FontAwesomeIcon icon={faHeadset} /> Contact
               </Link>
             </li>
 
@@ -83,7 +77,7 @@ const Header = () => {
                   className="nav-link-item px-3 py-2 text-gray-700 font-semibold hover:text-green-600 transition-colors no-underline border-b-2 border-transparent group-hover:border-green-600"
                 >
                   <span className="relative">
-              <FontAwesomeIcon icon={faCartShopping} />
+                    <FontAwesomeIcon icon={faCartShopping} />
 
                     {!!cartCount && (
                       <span className="absolute top-0 right-0 bg-green-500 p-1 leading-[4px] rounded-full text-[8px] text-white">
@@ -101,7 +95,7 @@ const Header = () => {
             {/* User Profile */}
             {user && (
               <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
-                <FontAwesomeIcon icon={faUser}/>
+                <FontAwesomeIcon icon={faUser} />
                 <span className="font-semibold text-gray-800 text-sm">
                   {loggedInUser}
                 </span>
@@ -116,6 +110,18 @@ const Header = () => {
                 Login
               </Link>
             )}
+            {/* Online Status */}
+
+            <div className="flex items-center gap-2">
+              <i
+                className={`fa-solid fa-circle text-[0.5rem] ${onlineStatus ? "text-green-500" : "text-gray-400"}`}
+              ></i>
+              <span
+                className={onlineStatus ? "text-green-500" : "text-gray-400"}
+              >
+                {onlineStatus ? "Online" : "Offline"}
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,89 +1,118 @@
-# Date 12/1/2026
+# 🍔 QuickBite – Food Ordering Web Application
 
+QuickBite is a production-style food ordering web application built using **React** and **Redux Toolkit**.  
+This project is developed step-by-step focusing on **real-world frontend architecture**, **state management**, **performance optimization**, and **user experience**.
 
-# QuickBite food ordering app
+The goal of this project is to simulate how a modern food delivery app works while applying industry-standard React practices.
 
-# Features of this app 
+---
 
-- Shows Top-Rated restaurants.
-- Real data from APIs.
-- Lazzy loading.
-- Search restaurant.
-- Routing with dynamic Error Page.
-- Dynamic routing to show restaurant details.
-- Custom hook and optimization.
-- User's Online status.
-- Lazy Loading for performance optimization.
-- shimmer UI (dummy ui while loading to set user's mind ).
-- Tailwind CSS.
-- HOC for labeling pure veg.
-- Lifting state Up for Creating Menu with controlled & uncontrolled components.
-- Context API.
+## 🚀 Features of the App
 
-# Parcel 
+### 🏠 Restaurant & Menu Features
+- Browse restaurants and menus
+- Display **Top-Rated Restaurants**
+- Real-time data fetched from live APIs
+- Dynamic routing to show restaurant details
+- Search restaurants by name
+- Lazy loading of routes and components
+- Shimmer UI (skeleton screens) while data loads
+- Graceful error handling and fallback UI
 
-Do following things for us :
+---
 
-- It will create Dev Build
-- Local server
-- HMR- Hot Module Replacement (automatic refresh browser)
-- File Watching Algorithm - written in C++
-- Faster development experience(faster build) bcz of cache //.parcel-cache
-- Image optimization
-- Minification of files during build
-- Buildling
-- Compresses all files
-- consistent hashing (keeps track )
-- code splitting
-- Differntial bundling - to support older browser (takes care of differntial bundling if it needs to run on differnt platform or browsers)
-- Diagnostic(Good error handling and good error suggestion)
-- provide HTTPs
-- Tree shaking - will remove unused code
-- Different bundles for dev and production
-- ..for more read documentation of parcel
+### 🧭 Navigation & Routing
+- Routing using **React Router v6**
+- Dynamic routes for restaurant pages
+- Centralized layout with `<Outlet />`
+- Custom Error Page for invalid routes
 
-# React is fast due to those bundlers(here is parcel)
+---
 
-# Dist
+### ⚡ Performance & Optimization
+- Lazy Loading for better performance
+- Custom hooks for reusable logic
+- Optimized state selection using **memoization (Reselect)**
+- Prevent unnecessary re-renders using selectors
 
-- containing production based files
-- when we do 'npx parcel build index.html' Dist will bundle all the stuff and folder + files together to make build
+---
 
-# There are 2 type of export -
+### 🌐 Network & UX Enhancements
+- Detect user’s **online / offline status**
+- Show appropriate UI when user is offline
+- Smooth loading & error states for better UX
 
-1.  Default Export :
+---
 
-export default component
-import Component from "path"
+### 🛒 Cart Functionality
+- Add items to cart
+- Increase / decrease item quantity
+- Automatically remove items when quantity reaches zero
+- Cart data persisted using **LocalStorage**
+- Confirmation popups before:
+  - Deleting an item
+  - Clearing the entire cart
+- Global cart state management using Redux
 
-2.  Named Export : use when u have to export multiple things
-    export const Component
-    import { Component } from "path"
+---
 
-# React Hook
+### 🧠 State Management & Architecture
+- Global state handled using **Redux Toolkit**
+- Async API handling using **Redux Saga**
+- Clean separation of:
+  - UI components
+  - State logic
+  - Side effects
+- Lifting State Up where required
+- Controlled & Uncontrolled components in menu handling
 
-React hook is normal js Utility function
+---
 
-- useState - superPwerful state variable in react (useState maintains the state of variable)
-- useEffect - if u want something to do after rendering our page then use it
-  it is a function takes 2 arg
+### 🎨 UI & Styling
+- Fully responsive UI
+- Styled using **Tailwind CSS**
+- Reusable UI components
+- Higher Order Component (HOC) to label **Pure Veg Restaurants**
 
-1.  arrow function (callback fn) 2. dependency
+---
 
-# React is effiecient in DOM MAnipulation :
+### 🧩 Advanced React Concepts Used
+- Custom Hooks
+- Higher Order Components (HOC)
+- Context API
+- Redux Toolkit
+- Redux Saga
+- Memoization with Reselect
+- Lazy Loading & Code Splitting
+- Controlled & Uncontrolled Components
+- Error Boundaries (via Router)
 
-if we need to our data and UI Layer consistent to each other that is where react works when data changes its UI changes (by help of virtual DOM)
+---
 
-- whenever the state variable updates react re renser the component,
-  React will keep our UI in sync with the data layer. so as soon as our data will update our ui will update by re rendering
+## 🛠 Tech Stack
 
-# Re conciliation Algo (React Fiber) - introduced in react 16 :
+- **React 19**
+- **Redux Toolkit**
+- **Redux Saga**
+- **React Router DOM v6**
+- **Reselect**
+- **Tailwind CSS**
+- **SweetAlert2** (confirmation modals)
+- **FontAwesome Icons**
+- **LocalStorage API**
 
-- it is new way to update react DOM.
-- virtual DOM -> react element (object) it is normal js object it is not actual DOM but representaion of actual DOM ;
+---
 
-# Diff algorithm :
+## ⚙️ Installation & Setup
 
-- it tries to find out the differnce b/w (nodes of ) old virtual DOM & New virtual DOM then it will update the actual dom on every render cycle
-# QuickBite
----------------------------------------------------------------------------------
+```bash
+git clone <your-repository-url>
+cd quickbite
+npm install
+npm start
+
+![Dashboard](./src/assets/Screenshot%20(131).png)
+![Menu](./src/assets/Screenshot%20(132).png)
+![RemoveItem](./src/assets/Screenshot%20(133).png)
+![Logout](./src/assets/Screenshot%20(134).png)
+

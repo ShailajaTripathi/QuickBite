@@ -37,7 +37,7 @@ const Home = () => {
     }
 
     const filtered = listofRestaurant?.filter((res) =>
-      res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+      res?.info?.name.toLowerCase().includes(searchText.toLowerCase()),
     );
 
     setFilteredRestaurant(filtered);
@@ -120,7 +120,6 @@ const Home = () => {
       {/* Header Section */}
       <div className="bg-white shadow-md sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 py-6">
-         
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
             {/* Search Section */}
             <div className="flex gap-2">
@@ -150,7 +149,7 @@ const Home = () => {
                     const filteredRestaurant = listofRestaurant?.filter((res) =>
                       res?.info?.name
                         .toLowerCase()
-                        .includes(searchText.toLowerCase())
+                        .includes(searchText.toLowerCase()),
                     );
                     setSearched(true);
                     setFilteredRestaurant(filteredRestaurant);
@@ -173,9 +172,10 @@ const Home = () => {
                 </button>
               )}
             </div>
- <p className="text-gray-500 mb-4">
-            {filteredRestaurant?.length} restaurants available
-          </p>
+            
+            <p className="text-gray-500">
+              {filteredRestaurant?.length} restaurants available
+            </p>
             {/* Top Rated Button */}
             <div className="flex justify-center">
               {!ratingFilter && (
@@ -187,7 +187,7 @@ const Home = () => {
 
                     // 1. Filter the restaurants (keep only 4.0+)
                     const topRated = filteredRestaurant?.filter(
-                      (res) => res?.info?.avgRating >= 4
+                      (res) => res?.info?.avgRating >= 4,
                     );
 
                     // 2. Sort them in descending order (highest rating first)
