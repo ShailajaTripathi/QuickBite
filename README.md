@@ -112,7 +112,7 @@ npm install
 npm run start
 
 ```
-| Pages | Alert |
+| Dashboard / Menus | Remove / Delete |
 |-------|--------|
 |![Dashboard](./src/assets/Screenshot%20(133).png)| ![Menu](./src/assets/Screenshot%20(132).png)|
 |![Menu](./src/assets/Screenshot%20(131).png)|![Menu](./src/assets/Screenshot%20(134).png)|
