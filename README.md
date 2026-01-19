@@ -106,7 +106,7 @@ The goal of this project is to simulate how a modern food delivery app works whi
 ## ⚙️ Installation & Setup
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/ShailajaTripathi/QuickBite
 cd quickbite
 npm install
 npm start
