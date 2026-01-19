@@ -38,7 +38,7 @@
 
 
 import { useDispatch } from "react-redux";
-import { addItem, deleteItem } from "../../store/cartSlice";
+import { addItem, deleteItem,removeItem } from "../../store/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const CartItem = ({ item }) => {

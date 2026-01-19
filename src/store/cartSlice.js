@@ -14,21 +14,21 @@ const cartSlice = createSlice({
     items: loadCartFromStorage(),
   },
   reducers: {
-    addItem: (state, action) => {
-      const item = action.payload;
+  addItem: (state, action) => {
+  const item = action.payload;
 
-      const existingItem = state.items.find -(
-        (i) => i.card.info.id === item.card.info.id
-      );
+  const existingItem = state.items.find(
+    (i) => i.card.info.id === item.card.info.id
+  );
 
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        state.items.push({ ...item, quantity: 1 });
-      }
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    state.items.push({ ...item, quantity: 1 });
+  }
 
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
-    },
+  localStorage.setItem("cartItems", JSON.stringify(state.items));
+},
 
 
     removeItem: (state, action) => {

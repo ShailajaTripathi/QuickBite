@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -6,31 +6,63 @@ const Auth = () => {
   const { signup, login } = useAuth();
   const navigate = useNavigate();
   const [isSignup, setIsSignup] = useState(false);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [emailError, setEmailError] = useState("");
+ const [formData, setFormData] = useState({ name: "", email: "" });
+  const [errors, setErrors] = useState({ name: "", email: "" });
+
+  // 2. Centralized Validation Logic
+  const validate = (fieldName, value) => {
+    switch (fieldName) {
+      case "email":
+        if (!value) return "Email is required";
+        if (!/\S+@\S+\.\S+/.test(value)) return "Invalid email format";
+        return "";
+      case "name":
+        if (isSignup && !value) return "Name is required";
+        if (isSignup && value.length < 2) return "Name is too short";
+        return "";
+      default:
+        return "";
+    }
+  };
+  // 3. Handle Input Change (Real-time clearing)
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Validate as the user types
+    const error = validate(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email) {
-      setEmailError("Email is required");
+    // 4. Final Validation check before submitting
+    const emailErr = validate("email", formData.email);
+    const nameErr = isSignup ? validate("name", formData.name) : "";
+
+    if (emailErr || nameErr) {
+      setErrors({ email: emailErr, name: nameErr });
       return;
     }
 
     if (isSignup) {
-      signup({ name, email });
+      signup({ name: formData.name, email: formData.email });
       navigate("/");
     } else {
-      const success = login(email);
+      const success = login(formData.email);
       if (success) {
         navigate("/");
       } else {
-        setEmailError("User not found. Please signup first.");
+        setErrors((prev) => ({ ...prev, email: "User not found. Please signup first." }));
       }
     }
   };
 
+// Clear errors when switching between Login and Signup
+  useEffect(() => {
+    setErrors({ name: "", email: "" });
+  }, [isSignup]);
   return (
     <div className="max-w-md mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">
@@ -42,35 +74,37 @@ const Auth = () => {
           <input
             type="text"
             placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             className="w-full border p-2 rounded"
           />
         )}
-
+{errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         <input
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
           className="w-full border p-2 rounded"
         />
 
-        {emailError && <p className="text-red-500">{emailError}</p>}
+        {errors.email && <p className="text-red-500">{errors.email}</p>}
 
         <button className="bg-green-600 text-white px-4 py-2 rounded w-full">
           {isSignup ? "Sign Up" : "Login"}
         </button>
       </form>
 
-      <p
-        className={`text-center mt-4 cursor-pointer ${isSignup ? "text-green-600" : "text-blue-600"}`}
+      <div
+        className={`text-center mt-4 cursor-pointer text-green-600`}
         onClick={() => setIsSignup(!isSignup)}
       >
         {isSignup
-          ? "Already have an account? Login"
-          : "New user ? Sign up"}
-      </p>
+          ? <p>Already have an account?<span className="!text-blue-600"> Login</span></p>
+          : <p>New user ? <span className="!text-blue-600">Sign up</span></p>}
+      </div>
     </div>
   );
 };
