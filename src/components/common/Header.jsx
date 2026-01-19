@@ -5,9 +5,12 @@ import { useAuth } from "../../context/AuthContext.js";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faInfoCircle, faHeadset, faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { selectCartCount } from "../../store/cartSelectors.js";
+
 
 const Header = () => {
-  const cartItems = useSelector((store) => store.cart.items);
+  const cartCount = useSelector(selectCartCount);
+  // const cartItems = useSelector((store) => store.cart.items);
   const onlineStatus = useOnlineStatus();
   // const { loggedInUser } = useContext(UserContext);
   const loggedInUser = JSON.parse(localStorage.getItem("user"))?.name;
@@ -82,9 +85,9 @@ const Header = () => {
                   <span className="relative">
               <FontAwesomeIcon icon={faCartShopping} />
 
-                    {!!cartItems?.length && (
+                    {!!cartCount && (
                       <span className="absolute top-0 right-0 bg-green-500 p-1 leading-[4px] rounded-full text-[8px] text-white">
-                        {cartItems?.length}
+                        {cartCount}
                       </span>
                     )}
                   </span>

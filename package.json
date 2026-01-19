@@ -31,7 +31,9 @@
     "react-dom": "^19.1.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.20.0",
-    "redux-saga": "^1.4.2"
+    "redux-saga": "^1.4.2",
+    "reselect": "^5.1.1",
+    "sweetalert2": "^11.26.17"
   },
   "browserslist": [
     "Last 2 versions"

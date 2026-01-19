@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../store/cartSlice";
+import Swal from "sweetalert2";
 
  const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
@@ -27,12 +28,19 @@ export const AuthProvider = ({ children }) => {
     }
     return false;
   };
-
-
 const logout = () => {
-  // localStorage.removeItem("user");   // auth remove
-  dispatch(clearCart());             // cart empty
+  Swal.fire({
+    title: "Logout?",
+    text: "You will be logged out of your account",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Logout",
+  }).then((result) => {
+    if (result.isConfirmed) {
   setUser(null);   // context reset
+      dispatch(clearCart());
+    }
+  });
 };
 
 

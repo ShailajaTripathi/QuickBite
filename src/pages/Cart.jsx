@@ -2,16 +2,31 @@ import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/cart/CartItem";
 import { clearCart } from "../store/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { selectCartTotal } from "../store/cartSelectors";
+import Swal from "sweetalert2";
+
 const Cart = () => {
-  const cartItems = useSelector((store) => store.cart.items);
+    const totalPrice = useSelector(selectCartTotal);
+
   const dispatch = useDispatch();
 
-  const totalPrice =
-    cartItems.reduce((total, item) => {
-      const price = item.card.info.price ?? item.card.info.defaultPrice ?? 0;
-      return total + price * item.quantity;
-    }, 0) / 100;
+  const cartItems = useSelector((store) => store.cart.items);
+  
+  const handleClearCart = () => {
+    Swal.fire({
+      title: "Clear cart?",
+      text: "All items will be removed",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Clear",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(clearCart());
+      }
+    });
+  };
+
 
   // 🟡 EMPTY CART
   if (cartItems.length === 0) {
@@ -36,7 +51,7 @@ const Cart = () => {
         </div>
         <div>
           <button
-            onClick={() => dispatch(clearCart())}
+            onClick={handleClearCart}
             className="bg-gray-600 text-white px-4 py-1 rounded"
           >
             Clear Cart
