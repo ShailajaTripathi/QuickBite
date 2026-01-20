@@ -49,7 +49,7 @@ const RestaurantCard = (props) => {
         {/* Cost and Delivery Time */}
         <div className="flex justify-between items-center mb-3 text-sm">
           <span className="text-gray-700 font-medium">{costForTwo}</span>
-          <span className="text-gray-600">{sla?.slaString}</span>
+          <span className="text-gray-600"> {sla?.slaString}</span>
         </div>
 
         {/* Open/Closed Status */}

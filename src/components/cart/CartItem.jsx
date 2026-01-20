@@ -43,9 +43,8 @@ import Swal from "sweetalert2";
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  const { name, price, defaultPrice, imageId } = item.card.info;
-  const { id } = item.card.info;
-  
+  const { name, price, defaultPrice, imageId,id} = item.card.info;
+  console.log("Cart Item Rendered:",item.card);
 const handleDecrease = () => {
   if (item.quantity === 1) {
     Swal.fire({

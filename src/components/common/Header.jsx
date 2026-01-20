@@ -11,10 +11,10 @@ import {
   faUser,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import { selectCartCount } from "../../store/cartSelectors.js";
+import { selectCartItemsCount } from "../../store/cartSelectors.js";
 
 const Header = () => {
-  const cartCount = useSelector(selectCartCount);
+  const cartCount = useSelector(selectCartItemsCount);
   const onlineStatus = useOnlineStatus();
   const loggedInUser = JSON.parse(localStorage.getItem("user"))?.name;
   const { user, logout } = useAuth();

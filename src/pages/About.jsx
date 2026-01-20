@@ -18,7 +18,7 @@ const About = () => {
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Tech Stack</h2>
         <ul className="list-disc ml-6 text-gray-700">
-          <li>Frontend: React, Redux Toolkit, React Router</li>
+          <li>Frontend: React, Redux Toolkit, React Router, Redux Saga</li>
           <li>Backend: Node.js, Express</li>
           <li>State Management: Redux with persistence</li>
           <li>Styling: Tailwind CSS</li>

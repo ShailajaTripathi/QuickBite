@@ -17,7 +17,7 @@ const useOnlineStatus = () => {
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
-    // Cleanup taaki memory leak na ho
+    // Cleanup to prevent memory leaks
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);

@@ -4,7 +4,7 @@ const loadCartFromStorage = () => {
   try {
     const data = localStorage.getItem("cartItems");
     return data ? JSON.parse(data) : [];
-  } catch (e) {
+  } catch {
     return [];
   }
 };
@@ -17,38 +17,44 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const item = action.payload;
-
       const existingItem = state.items.find(
-        (i) => i.card.info.id === item.card.info.id,
+        (i) => i.card.info.id === item.card.info.id
       );
 
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        state.items.push({ ...item, quantity: 1 });
+        state.items.push({
+          ...item,
+          quantity: 1,
+        });
       }
 
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
 
-   removeItem: (state, action) => {
-  const id = action.payload;
+    removeItem: (state, action) => {
+      const id = action.payload;
 
-  state.items = state.items.map((item) =>
-    item.card.info.id === id
-      ? { ...item, quantity: item.quantity - 1 }
-      : item
-  );
+      state.items = state.items
+        .map((item) =>
+          item.card.info.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0);
 
-  localStorage.setItem("cartItems", JSON.stringify(state.items));
-},
-
+      localStorage.setItem("cartItems", JSON.stringify(state.items));
+    },
 
     deleteItem: (state, action) => {
       const id = action.payload;
-      state.items = state.items.filter((item) => item.card.info.id !== id);
+      state.items = state.items.filter(
+        (item) => item.card.info.id !== id
+      );
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
+
     clearCart: (state) => {
       state.items = [];
       localStorage.removeItem("cartItems");
@@ -56,5 +62,11 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearCart, deleteItem } = cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  deleteItem,
+  clearCart,
+} = cartSlice.actions;
+
 export default cartSlice.reducer;

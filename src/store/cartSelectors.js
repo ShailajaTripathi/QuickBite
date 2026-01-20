@@ -3,9 +3,15 @@ import { createSelector } from "reselect";
 const selectCart = (state) => state.cart.items;
 
 // total items count
-export const selectCartCount = createSelector(
+export const selectCartItemsCount = createSelector(
   [selectCart],
-  (items) => items.reduce((sum, item) => sum + item.quantity, 0)
+  (items) => items.length
+);
+// total quantity
+export const selectCartTotalQuantity = createSelector(
+  [selectCart],
+  (items) =>
+    items.reduce((sum, item) => sum + item.quantity, 0)
 );
 
 // total price

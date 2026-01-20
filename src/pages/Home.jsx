@@ -4,12 +4,11 @@ import RestaurantCard, {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurants } from "../store/restaurantSlice.js";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Shimmer from "../components/common/Shimmer.jsx";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus.js";
 const Home = () => {
-  // state variable - superpowerful variable
   const [listofRestaurant, setListofrestaurant] = useState([]); // destructure
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -43,66 +42,7 @@ const Home = () => {
     setFilteredRestaurant(filtered);
   }, [searchText]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     `${API}/api/restaurants`
-  //     //  "https://raw.githubusercontent.com/namastedev/namaste-react/refs/heads/main/swiggy-api"
-  //   )
-  //     .then((res) => res.json())
-
-  //     .then((data) => {
-  //       // promise chainging to get data
-  //       // The API returns an array directly
-  //       let resData = null;
-  //       // If data is already an array, use it directly
-  //       if (Array.isArray(data)) {
-  //         // Transform flat structure to match expected format with 'info' wrapper
-  //         resData = data.map((restaurant) => ({
-  //           info: {
-  //             id: restaurant.id,
-  //             name: restaurant.name,
-  //             cloudinaryImageId: restaurant.imageUrl,
-  //             avgRating: restaurant.rating,
-  //             cuisines: restaurant.cuisines || [],
-  //             costForTwo: restaurant.costForTwo,
-  //             sla: {
-  //               slaString: restaurant.deliveryTime
-  //                 ? `${restaurant.deliveryTime} mins`
-  //                 : "Unknown",
-  //             },
-  //             veg: restaurant?.veg || false,
-  //             isOpen: restaurant.isOpen,
-  //           },
-  //         }));
-  //       } else {
-  //         // Try multiple paths to find the restaurants array (for Swiggy API format)
-  //         resData =
-  //           data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-  //             ?.restaurants;
-
-  //         // If not found, try direct restaurants property
-  //         if (!resData) {
-  //           resData = data?.restaurants;
-  //         }
-
-  //         // If still not found, try data.cards[4] alternative structure
-  //         if (!resData) {
-  //           resData = data?.data?.cards[4]?.card?.card?.restaurants;
-  //         }
-  //       }
-
-  //       if (resData && Array.isArray(resData)) {
-  //         setListofrestaurant(resData);
-  //         setFilteredRestaurant(resData);
-  //       } else {
-  //         console.error("Could not find restaurants data in response");
-  //         console.log("Raw data object keys:", Object.keys(data));
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  //   // console.log("Filtered Restaurant:", filteredRestaurant);
-  // }, []);
-
+ 
   const onlineStatus = useOnlineStatus(); //custom hook call to check online status
 
   if (onlineStatus === false) {

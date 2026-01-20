@@ -3,14 +3,14 @@ import CartItem from "../components/cart/CartItem";
 import { clearCart } from "../store/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { selectCartTotal } from "../store/cartSelectors";
+import { selectCartTotal ,selectCartItemsCount,selectCartTotalQuantity} from "../store/cartSelectors";
 import Swal from "sweetalert2";
 
 const Cart = () => {
     const totalPrice = useSelector(selectCartTotal);
-
+  const cartCount = useSelector(selectCartItemsCount);
+  const cartItemsCount = useSelector(selectCartTotalQuantity);
   const dispatch = useDispatch();
-
   const cartItems = useSelector((store) => store.cart.items);
   
   const handleClearCart = () => {
@@ -20,7 +20,7 @@ const Cart = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Clear",
-    }).then((result) => {
+     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(clearCart());
       }
@@ -28,7 +28,7 @@ const Cart = () => {
   };
 
 
-  // 🟡 EMPTY CART
+  //  EMPTY CART
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh]">
@@ -42,14 +42,16 @@ const Cart = () => {
     );
   }
 
-  // 🟢 CART WITH ITEMS
+  // CART WITH ITEMS
   return (
     <div className="max-w-4xl mx-auto p-4 ">
       <div className="flex justify-between items-center gap-3">
         <div>
-          <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+          <h1 className="text-3xl font-bold mb-6"> My Cart </h1>
+         
         </div>
-        <div>
+        <div className="flex items-end gap-2">
+        <p className="text-gray-600 mb-2">Shipment of {cartItemsCount} {cartItemsCount === 1 ? "item" : "items" }</p>
           <button
             onClick={handleClearCart}
             className="bg-gray-600 text-white px-4 py-1 rounded"
@@ -65,7 +67,7 @@ const Cart = () => {
         ))}
       </div>
       <div className="text-right font-bold text-xl mt-6">
-        Total Price : ₹ {totalPrice} /-
+        Total Price : ₹{totalPrice} /-
       </div>
     </div>
   );
