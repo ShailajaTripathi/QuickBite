@@ -116,3 +116,12 @@ npm run start
 <!-- |-------|--------| -->
 <!-- |![Dashboard](./src/assets/Screenshot%20(133).png)| ![Menu](./src/assets/Screenshot%20(132).png)| -->
 <!-- |![Menu](./src/assets/Screenshot%20(131).png)|![Menu](./src/assets/Screenshot%20(134).png)| -->
+
+<!-- Order by dropdown 
+Top Rated Dining
+Rate
+asending decending
+
+-- remove online
+
+align center home page text -->

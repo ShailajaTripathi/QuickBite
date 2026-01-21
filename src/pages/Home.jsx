@@ -42,7 +42,6 @@ const Home = () => {
     setFilteredRestaurant(filtered);
   }, [searchText]);
 
- 
   const onlineStatus = useOnlineStatus(); //custom hook call to check online status
 
   if (onlineStatus === false) {
@@ -112,10 +111,7 @@ const Home = () => {
                 </button>
               )}
             </div>
-            
-            <p className="text-gray-500">
-              {filteredRestaurant?.length} restaurants available
-            </p>
+
             {/* Top Rated Button */}
             <div className="flex justify-center">
               {!ratingFilter && (
@@ -150,10 +146,11 @@ const Home = () => {
       {/* Restaurant Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8">
-          <i className="fa-solid fa-plate-wheat"></i> Popular Restaurants
+          <i className="fa-solid fa-plate-wheat"></i> Restaurants near you{" "}
+          <span className="text-gray-500"> ({filteredRestaurant?.length})</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredRestaurant ? (
+          {filteredRestaurant.length ? (
             filteredRestaurant?.map((restaurant) => (
               <Link
                 key={restaurant?.info?.id}
@@ -169,8 +166,8 @@ const Home = () => {
               </Link>
             ))
           ) : (
-            <div className="text-center text-gray-600 mt-10">
-              <h2 className="text-2xl font-semibold">
+            <div className="place-self-center text-center text-gray-600 mt-10">
+              <h2 className="text-2xl font-semibold ">
                 No restaurants found 🍽️
               </h2>
               <p className="mt-2">Try a different search or clear filters</p>

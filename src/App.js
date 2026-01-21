@@ -48,7 +48,6 @@ import store from "./store/store";
 import Auth from "./pages/Auth.jsx";
 import { AuthProvider } from "./context/AuthContext.js";
 
-
 const About = lazy(() => import("./pages/About.jsx")); //dynamic import of about component with lazy loading so that about component will loaded only when /about route visited
 
 //“MainFrame is a layout component used as a parent route in React Router to keep common UI like header constant and render page-specific content using Outlet.”
@@ -57,17 +56,16 @@ const MainFrame = () => {
   return (
     // wrapping entire app in context and redux providers
 
-      <Provider store={store}>
-        <AuthProvider >
-         
-            <div className="app">
-              {/* <RouterProvider router={appRouter} /> */}
-              <Header />
-              <Outlet />
-              {/* "Outlet is used in layout routes to render child route components dynamically." outlet is used to render children components of layout components */}
-            </div>
-        </AuthProvider>
-      </Provider>
+    <Provider store={store}>
+      <AuthProvider>
+        <div className="app">
+          {/* <RouterProvider router={appRouter} /> */}
+          <Header />
+          <Outlet />
+          {/* "Outlet is used in layout routes to render child route components dynamically." outlet is used to render children components of layout components */}
+        </div>
+      </AuthProvider>
+    </Provider>
   );
 }; //creating layout component for header and outlet
 
@@ -93,9 +91,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element:  <ProtectedRoute>
-      <Cart />
-    </ProtectedRoute>,
+        element: (
+           <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",

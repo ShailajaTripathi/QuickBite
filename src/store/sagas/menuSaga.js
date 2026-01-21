@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchMenu, fetchMenuSuccess, fetchMenuFailure } from "../menuSlice";
 import { API } from "../../utils/constant";
-// const API = "http://localhost:3000";
 
 function* fetchMenuWorker(action) {
   try {

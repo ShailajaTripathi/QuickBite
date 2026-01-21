@@ -1,18 +1,23 @@
+// import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/cart/CartItem";
 import { clearCart } from "../store/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { selectCartTotal ,selectCartItemsCount,selectCartTotalQuantity} from "../store/cartSelectors";
+import {
+  selectCartTotal,
+  selectCartItemsCount,
+  selectCartTotalQuantity,
+} from "../store/cartSelectors";
 import Swal from "sweetalert2";
 
 const Cart = () => {
-    const totalPrice = useSelector(selectCartTotal);
-  const cartCount = useSelector(selectCartItemsCount);
+  const totalPrice = useSelector(selectCartTotal);
+  // const cartCount = useSelector(selectCartItemsCount);
   const cartItemsCount = useSelector(selectCartTotalQuantity);
   const dispatch = useDispatch();
   const cartItems = useSelector((store) => store.cart.items);
-  
+
   const handleClearCart = () => {
     Swal.fire({
       title: "Clear cart?",
@@ -20,13 +25,16 @@ const Cart = () => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Clear",
-     }).then((result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
         dispatch(clearCart());
       }
     });
   };
 
+  // useEffect(() => {
+  //   console.log("Memory leaks, cartcount");
+  // }, [cartCount]);
 
   //  EMPTY CART
   if (cartItems.length === 0) {
@@ -48,10 +56,12 @@ const Cart = () => {
       <div className="flex justify-between items-center gap-3">
         <div>
           <h1 className="text-3xl font-bold mb-6"> My Cart </h1>
-         
         </div>
         <div className="flex items-end gap-2">
-        <p className="text-gray-600 mb-2">Shipment of {cartItemsCount} {cartItemsCount === 1 ? "item" : "items" }</p>
+          <p className="text-gray-600 mb-2">
+            Shipment of {cartItemsCount}{" "}
+            {cartItemsCount === 1 ? "item" : "items"}
+          </p>
           <button
             onClick={handleClearCart}
             className="bg-gray-600 text-white px-4 py-1 rounded"
