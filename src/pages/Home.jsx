@@ -3,24 +3,25 @@ import RestaurantCard, {
 } from "../components/restaurant/RestaurantCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurants } from "../store/restaurantSlice.js";
-
 import { useEffect, useState } from "react";
 import Shimmer from "../components/common/Shimmer.jsx";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus.js";
+
 const Home = () => {
-  const [listofRestaurant, setListofrestaurant] = useState([]); // destructure
+  const [listofRestaurant, setListofrestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searched, setSearched] = useState(false);
   const [ratingFilter, setRatingFilter] = useState(false);
-  const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard); // HOC call to get new component with veg label to display pure veg restaurant
+  const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchRestaurants());
   }, []);
+
   const { list, loading, error } = useSelector((state) => state.restaurants);
 
   useEffect(() => {
@@ -29,115 +30,122 @@ const Home = () => {
       setFilteredRestaurant(list);
     }
   }, [list]);
+
   useEffect(() => {
     if (!searchText) {
       setFilteredRestaurant(listofRestaurant);
       return;
     }
-
     const filtered = listofRestaurant?.filter((res) =>
-      res?.info?.name.toLowerCase().includes(searchText.toLowerCase()),
+      res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
     );
-
     setFilteredRestaurant(filtered);
   }, [searchText]);
 
-  const onlineStatus = useOnlineStatus(); //custom hook call to check online status
+  // Logic for the Dropdown
+  const handleSortChange = (e) => {
+    const value = e.target.value;
+
+    if (value === "top-rated") {
+      setRatingFilter(true);
+      // 1. Filter the restaurants (keep only 4.0+)
+      const topRated = listofRestaurant?.filter(
+        (res) => res?.info?.avgRating >= 4
+      );
+      // 2. Sort them in descending order
+      const sortedList = [...topRated].sort((a, b) => {
+        return b?.info?.avgRating - a?.info?.avgRating;
+      });
+      setFilteredRestaurant(sortedList);
+    } else {
+      // Default / All Restaurants
+      setRatingFilter(false);
+      setFilteredRestaurant(listofRestaurant);
+    }
+  };
+
+  const onlineStatus = useOnlineStatus();
 
   if (onlineStatus === false) {
     return (
-      <h1>
+      <h1 className="text-center mt-20 font-bold">
         Looks like you're offline !! Please check your internet connection...
       </h1>
     );
   }
+
   if (loading) return <Shimmer />;
-  if (error) return <h1>Error loading restaurants</h1>;
+  if (error) return <h1 className="text-center mt-20 text-red-500">Error loading restaurants</h1>;
 
   return (
     <div className="body bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
-      {/* Header Section */}
       <div className="bg-white shadow-md sticky top-16 z-40">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-            {/* Search Section */}
-            <div className="flex gap-2">
-              <div className="relative flex items-center flex-1">
-                <input
-                  type="text"
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  className="w-full px-4 py-2 pr-10 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition-colors"
-                  placeholder="Search restaurants..."
-                />
-
-                {/* Clear "X" Button */}
+          <div className="flex flex-col md:flex-row md:items-start gap-6">
+            
+            {/* Left Side: Search & Dropdown Stacked */}
+            <div className="flex flex-col gap-4 w-full md:w-1/2">
+              {/* Search Bar */}
+              <div className="flex gap-2">
+                <div className="relative flex items-center flex-1">
+                  <input
+                    type="text"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    className="w-full px-4 py-2 pr-10 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition-colors"
+                    placeholder="Search restaurants..."
+                  />
+                  {searchText && (
+                    <button
+                      onClick={() => setSearchText("")}
+                      className="absolute right-3 text-gray-500 hover:text-gray-700 focus:outline-none text-xl font-bold"
+                    >
+                      ×
+                    </button>
+                  )}
+                </div>
                 {searchText && (
                   <button
-                    onClick={() => setSearchText("")}
-                    className="absolute right-3 text-gray-500 hover:text-gray-700 focus:outline-none text-xl font-bold"
+                    className="px-6 py-2 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors shadow-md"
+                    onClick={() => {
+                      const filtered = listofRestaurant?.filter((res) =>
+                        res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+                      );
+                      setSearched(true);
+                      setFilteredRestaurant(filtered);
+                      setSearchText("");
+                    }}
                   >
-                    ×
+                    Search
                   </button>
                 )}
               </div>
-              {searchText && (
-                <button
-                  className="px-6 py-2 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-400 transition-colors shadow-md"
-                  onClick={() => {
-                    const filteredRestaurant = listofRestaurant?.filter((res) =>
-                      res?.info?.name
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase()),
-                    );
-                    setSearched(true);
-                    setFilteredRestaurant(filteredRestaurant);
-                    setSearchText("");
-                  }}
+
+              {/* NEW Dropdown: Placed below the search bar */}
+              <div className="flex items-center gap-3">
+                <select
+                  className="px-4 py-2 border-2 border-gray-200 rounded-lg font-semibold bg-white hover:border-green-500 cursor-pointer outline-none transition-all shadow-sm"
+                  onChange={handleSortChange}
+                  value={ratingFilter ? "top-rated" : "default"}
                 >
-                  <i className="fa-solid fa-search"></i> Search
-                </button>
-              )}
-              {(searched || ratingFilter) && (
-                <button
-                  className="px-2 py-2 border-green-500 font-semibold rounded-lg transition-colors shadow-md"
-                  onClick={() => {
-                    setRatingFilter(false);
-                    setSearchText("");
-                    setFilteredRestaurant(listofRestaurant);
-                  }}
-                >
-                  Clear All
-                </button>
-              )}
-            </div>
+                  <option value="default">Order By: Default</option>
+                  <option value="top-rated">Top Rating (4.0+)</option>
+                </select>
 
-            {/* Top Rated Button */}
-            <div className="flex justify-center">
-              {!ratingFilter && (
-                <button
-                  // disabled={!filteredRestaurant?.length}
-                  className="px-6 py-2 border rounded-lg font-semibold hover:shadow-lg transition-all shadow-md"
-                  onClick={() => {
-                    setRatingFilter(!ratingFilter);
-
-                    // 1. Filter the restaurants (keep only 4.0+)
-                    const topRated = filteredRestaurant?.filter(
-                      (res) => res?.info?.avgRating >= 4,
-                    );
-
-                    // 2. Sort them in descending order (highest rating first)
-                    const sortedList = [...topRated].sort((a, b) => {
-                      return b?.info?.avgRating - a?.info?.avgRating;
-                    });
-
-                    // 3. Update the state
-                    setFilteredRestaurant(sortedList);
-                  }}
-                >
-                  <i className="fa-solid fa-utensils"></i> Top Rated Dining
-                </button>
-              )}
+                {(searched || ratingFilter) && (
+                  <button
+                    className="text-sm text-red-500 hover:underline font-bold"
+                    onClick={() => {
+                      setRatingFilter(false);
+                      setSearched(false);
+                      setSearchText("");
+                      setFilteredRestaurant(listofRestaurant);
+                    }}
+                  >
+                    Clear Filters
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -146,18 +154,20 @@ const Home = () => {
       {/* Restaurant Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8">
-          <i className="fa-solid fa-plate-wheat"></i> Restaurants near you{" "}
-          <span className="text-gray-500"> ({filteredRestaurant?.length})</span>
+          <i className="fa-solid fa-plate-wheat mr-2"></i> Restaurants near you
+          <span className="text-gray-500 text-xl font-normal ml-2">
+            ({filteredRestaurant?.length})
+          </span>
         </h2>
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredRestaurant.length ? (
             filteredRestaurant?.map((restaurant) => (
               <Link
                 key={restaurant?.info?.id}
                 to={`/restaurants/${restaurant?.info?.id}`}
-                className="no-underline"
+                className="hover:scale-[0.98] transition-transform"
               >
-                {/* if restaurant is pure veg then add pure veg label to it --   info?.isVeg ===true */}
                 {restaurant?.info?.veg === true ? (
                   <RestaurantCardWithVegLabel list={restaurant} />
                 ) : (
@@ -166,10 +176,8 @@ const Home = () => {
               </Link>
             ))
           ) : (
-            <div className="place-self-center text-center text-gray-600 mt-10">
-              <h2 className="text-2xl font-semibold ">
-                No restaurants found 🍽️
-              </h2>
+            <div className="col-span-full text-center text-gray-600 mt-10">
+              <h2 className="text-2xl font-semibold ">No restaurants found 🍽️</h2>
               <p className="mt-2">Try a different search or clear filters</p>
             </div>
           )}
@@ -178,4 +186,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;
