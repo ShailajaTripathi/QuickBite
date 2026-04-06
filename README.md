@@ -122,6 +122,6 @@ Top Rated Dining
 Rate
 asending decending
 
--- remove online
+--- remove online
 
 align center home page text -->
